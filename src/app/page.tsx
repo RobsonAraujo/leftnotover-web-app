@@ -77,39 +77,27 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 pt-32">
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
-          <div className="text-center lg:text-left space-y-8 z-10">
-            <div className="space-y-4">
-              <h1
-                className={`text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white ${
-                  language === "ur" ? "font-urdu" : ""
-                }`}
-                dir={language === "ur" ? "rtl" : "ltr"}
-              >
-                {t.title}
-                <span className="block">{t.titleSecond}</span>
-              </h1>
-              <p
-                className={`text-xl sm:text-2xl text-white font-light max-w-2xl mx-auto lg:mx-0 ${
-                  language === "ur" ? "font-urdu" : ""
-                }`}
-                dir={language === "ur" ? "rtl" : "ltr"}
-              >
-                {t.subtitle}
-              </p>
-            </div>
-
-            <div
-              className={`space-y-6 text-lg sm:text-xl text-white max-w-2xl mx-auto lg:mx-0 ${
-                language === "ur" ? "font-urdu" : ""
+          <div className="text-center lg:text-left space-y-6 z-10 w-full">
+            <h1
+              className={`text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-[1.1] text-white tracking-tight ${
+                language === "ur" ? "font-urdu" : "font-inter"
               }`}
               dir={language === "ur" ? "rtl" : "ltr"}
             >
-              <p>{t.paragraph1}</p>
-              <p>{t.paragraph2}</p>
-            </div>
+              {t.title}
+              <span className="block mt-4">{t.titleSecond}</span>
+            </h1>
+            <p
+              className={`text-xl sm:text-2xl lg:text-3xl text-white font-medium max-w-full mx-auto lg:mx-0 leading-relaxed ${
+                language === "ur" ? "font-urdu" : "font-inter"
+              }`}
+              dir={language === "ur" ? "rtl" : "ltr"}
+            >
+              {t.subtitle}
+            </p>
           </div>
 
           {/* Right Column - Mobile App Mockup */}
@@ -119,7 +107,7 @@ export default function Home() {
               <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-32 h-20 bg-black/20 rounded-full blur-xl"></div>
 
               {/* Phone Mockup */}
-              <div className="relative w-72 h-[600px] mx-auto">
+              <div className="relative w-80 h-[650px] lg:w-88 lg:h-[720px] mx-auto">
                 {/* Phone Frame */}
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black rounded-[3rem] shadow-2xl border-8 border-gray-800">
                   {/* Notch */}
