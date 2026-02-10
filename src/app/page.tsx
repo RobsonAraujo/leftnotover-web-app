@@ -110,6 +110,42 @@ export default function Home() {
   const [language, setLanguage] = useState<"en" | "ur">("en");
   const t = translations[language];
 
+  // Newsletter / subscription state
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [message, setMessage] = useState("");
+
+  async function handleSubscribe() {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setStatus("error");
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      setStatus("loading");
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("success");
+        setMessage("Thanks — we've recorded your interest.");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data?.error || "Subscription failed.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setMessage("Network error. Please try again later.");
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a3d2b] via-[#2d5f3f] to-[#1a3d2b] text-white overflow-hidden">
       {/* Header */}
@@ -873,17 +909,38 @@ export default function Home() {
             <div>
               <h3 className="text-white font-semibold mb-3">Stay Updated</h3>
               <p className="text-sm text-green-100/80 mb-3">
-                Get notified when we launch
+                Join our mailing list to receive launch updates and occasional
+                product news. We only store your email in Notion for now.
               </p>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && status !== "loading") {
+                      e.preventDefault();
+                      handleSubscribe();
+                    }
+                  }}
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:border-white/40"
                 />
-                <button className="px-4 py-2 bg-white text-[#1a3d2b] rounded-lg font-semibold text-sm hover:bg-green-50 transition">
-                  Join
+                <button
+                  onClick={handleSubscribe}
+                  disabled={status === "loading"}
+                  className="px-4 py-2 bg-white text-[#1a3d2b] rounded-lg font-semibold text-sm hover:bg-green-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === "loading" ? "Sending..." : "Join"}
                 </button>
+              </div>
+              <div className="mt-2">
+                {status === "success" && (
+                  <p className="text-sm text-green-200">{message}</p>
+                )}
+                {status === "error" && (
+                  <p className="text-sm text-red-300">{message}</p>
+                )}
               </div>
             </div>
           </div>
