@@ -175,7 +175,7 @@ export default function Home() {
 
           {/* Right Column - Mobile App Mockup */}
           <div className="relative flex items-center justify-center lg:justify-end">
-            <div className="relative transform rotate-6 hover:rotate-3 transition-transform duration-500">
+            <div className="relative phone-float">
               {/* Hand shadow/base */}
               <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-32 h-20 bg-black/20 rounded-full blur-xl"></div>
 
