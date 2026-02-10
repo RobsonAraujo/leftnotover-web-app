@@ -133,7 +133,11 @@ export async function POST(req: Request) {
 
         if (!emailRes.ok) {
           const txt = await emailRes.text();
-          emailSendResult = { ok: false, details: txt, status: emailRes.status };
+          emailSendResult = {
+            ok: false,
+            details: txt,
+            status: emailRes.status,
+          };
         } else {
           emailSendResult = { ok: true };
         }
