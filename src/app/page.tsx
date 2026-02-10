@@ -112,9 +112,9 @@ export default function Home() {
 
   // Newsletter / subscription state
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
 
   async function handleSubscribe() {

@@ -9,24 +9,33 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    const NOTION_KEY = process.env.notion_key_integration;
-    const DATABASE_ID = process.env.database_id;
+    const NOTION_KEY = process.env.NOTION_SECRET;
+    const DATABASE_ID = process.env.NOTION_DB;
 
     if (!NOTION_KEY || !DATABASE_ID) {
-      return NextResponse.json({ error: "Notion not configured on server" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Notion not configured on server" },
+        { status: 500 },
+      );
     }
 
     // Fetch database schema to determine property types
-    const dbRes = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}`, {
-      headers: {
-        Authorization: `Bearer ${NOTION_KEY}`,
-        "Notion-Version": "2022-06-28",
+    const dbRes = await fetch(
+      `https://api.notion.com/v1/databases/${DATABASE_ID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${NOTION_KEY}`,
+          "Notion-Version": "2022-06-28",
+        },
       },
-    });
+    );
 
     if (!dbRes.ok) {
       const text = await dbRes.text();
-      return NextResponse.json({ error: "Failed to read Notion database schema", details: text }, { status: dbRes.status });
+      return NextResponse.json(
+        { error: "Failed to read Notion database schema", details: text },
+        { status: dbRes.status },
+      );
     }
 
     const dbInfo = await dbRes.json();
@@ -43,25 +52,37 @@ export async function POST(req: Request) {
       } else if (type === "title") {
         propertiesPayload["Email"] = { title: [{ text: { content: email } }] };
       } else if (type === "rich_text") {
-        propertiesPayload["Email"] = { rich_text: [{ text: { content: email } }] };
+        propertiesPayload["Email"] = {
+          rich_text: [{ text: { content: email } }],
+        };
       } else {
         // fallback to setting as rich_text
-        propertiesPayload["Email"] = { rich_text: [{ text: { content: email } }] };
+        propertiesPayload["Email"] = {
+          rich_text: [{ text: { content: email } }],
+        };
       }
     } else {
       // Try to find an email property, otherwise use the database title property
-      const emailProp = Object.keys(props).find((k) => props[k].type === "email");
-      const titleProp = Object.keys(props).find((k) => props[k].type === "title");
+      const emailProp = Object.keys(props).find(
+        (k) => props[k].type === "email",
+      );
+      const titleProp = Object.keys(props).find(
+        (k) => props[k].type === "title",
+      );
 
       if (emailProp) {
         propertiesPayload[emailProp] = { email };
       } else if (titleProp) {
-        propertiesPayload[titleProp] = { title: [{ text: { content: email } }] };
+        propertiesPayload[titleProp] = {
+          title: [{ text: { content: email } }],
+        };
       } else {
         // As a last resort, pick the first property and set as rich_text (may still fail)
         const firstProp = Object.keys(props)[0];
         if (firstProp) {
-          propertiesPayload[firstProp] = { rich_text: [{ text: { content: email } }] };
+          propertiesPayload[firstProp] = {
+            rich_text: [{ text: { content: email } }],
+          };
         }
       }
     }
@@ -83,11 +104,49 @@ export async function POST(req: Request) {
 
     if (!res.ok) {
       const text = await res.text();
-      return NextResponse.json({ error: "Notion API error", details: text }, { status: res.status });
+      return NextResponse.json(
+        { error: "Notion API error", details: text },
+        { status: res.status },
+      );
     }
 
-    return NextResponse.json({ success: true });
+    // Send a thank-you email via Resend if configured
+    const RESEND_KEY = process.env.RESEND_API_KEY;
+    const RESEND_FROM = process.env.RESEND_FROM_EMAIL;
+    let emailSendResult: any = null;
+
+    if (RESEND_KEY && RESEND_FROM) {
+      try {
+        const emailRes = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${RESEND_KEY}`,
+          },
+          body: JSON.stringify({
+            from: RESEND_FROM,
+            to: email,
+            subject: "Thanks for joining LeftNotOver",
+            html: `<div style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial; color:#0f172a"><p>Hi,</p><p>Thanks for signing up for LeftNotOver. We appreciate your interest — we'll keep you updated as we launch.</p><p>— The LeftNotOver Team</p></div>`,
+          }),
+        });
+
+        if (!emailRes.ok) {
+          const txt = await emailRes.text();
+          emailSendResult = { ok: false, details: txt, status: emailRes.status };
+        } else {
+          emailSendResult = { ok: true };
+        }
+      } catch (e) {
+        emailSendResult = { ok: false, details: String(e) };
+      }
+    }
+
+    return NextResponse.json({ success: true, emailSent: emailSendResult });
   } catch (err) {
-    return NextResponse.json({ error: "Server error", details: String(err) }, { status: 500 });
+    return NextResponse.json(
+      { error: "Server error", details: String(err) },
+      { status: 500 },
+    );
   }
 }
