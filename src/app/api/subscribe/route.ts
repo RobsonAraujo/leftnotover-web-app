@@ -126,8 +126,84 @@ export async function POST(req: Request) {
           body: JSON.stringify({
             from: RESEND_FROM,
             to: email,
-            subject: "Thanks for joining LeftNotOver",
-            html: `<div style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial; color:#0f172a"><p>Hi,</p><p>Thanks for signing up for LeftNotOver. We appreciate your interest — we'll keep you updated as we launch.</p><p>— The LeftNotOver Team</p></div>`,
+            subject: "Welcome to LeftNotOver – You're in!",
+            html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; background-color: #f5f5f5;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #1a3d2b; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr>
+            <td align="center" style="padding: 40px 20px; border-bottom: 2px solid #22c55e;">
+              <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #fff; letter-spacing: -0.5px;">LeftNotOver</h1>
+              <p style="margin: 0; font-size: 13px; color: #86efac; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;">Fresh • Affordable • Sustainable</p>
+            </td>
+          </tr>
+          <!-- Content -->
+          <tr>
+            <td style="padding: 40px 30px; color: #fff;">
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 600; color: #fff;">You're in! 🎉</h2>
+              <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #fff;">Hi there,</p>
+              <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #fff;">Thanks so much for joining LeftNotOver. We're thrilled to have you as part of our community of conscious consumers who care about reducing food waste and supporting affordability.</p>
+              
+              <!-- Features -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin: 30px 0;">
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #fff;">🌍 Reduce Food Waste</p>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #e8f5e9;">Help us connect restaurants, bakeries & hotels with people who want fresh food at great prices.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #fff;">💚 Affordable Quality</p>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #e8f5e9;">Save money on fresh meals from your favorite local businesses.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #fff;">🚀 Coming Soon</p>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #e8f5e9;">We're building something special. You'll be the first to know when we launch.</p>
+                  </td>
+                </tr>
+              </table>
+              
+              <p style="margin: 30px 0 0 0; font-size: 16px; line-height: 1.6; color: #fff;">In the meantime, stay tuned for launch updates and occasional insights about our journey. We'll only send you what matters.</p>
+              
+              <!-- CTA -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin: 30px 0;">
+                <tr>
+                  <td align="center">
+                    <a href="https://leftnotover.com" style="display: inline-block; padding: 14px 32px; background-color: #fff; color: #1a3d2b; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Learn More About Us</a>
+                  </td>
+                </tr>
+              </table>
+              
+              <p style="margin: 30px 0 0 0; font-size: 14px; line-height: 1.5; color: #c8e6c9;">Questions? Reach out to us anytime. We'd love to hear from you.</p>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 30px 20px; border-top: 1px solid #22c55e; color: #b0bec5;">
+              <p style="margin: 0 0 12px 0; font-size: 13px;">© 2026 LeftNotOver. All rights reserved.</p>
+              <p style="margin: 0; font-size: 12px;">
+                <a href="#" style="color: #86efac; text-decoration: none;">Privacy Policy</a> • 
+                <a href="#" style="color: #86efac; text-decoration: none;">Unsubscribe</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
           }),
         });
 
