@@ -147,9 +147,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a3d2b] via-[#2d5f3f] to-[#1a3d2b] text-white overflow-hidden">
+    <div className="min-h-screen text-white overflow-hidden" style={{backgroundImage: 'linear-gradient(to bottom right, #066f6c, #054945, #066f6c)'}}>
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a3d2b]/95 backdrop-blur-sm border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/10" style={{backgroundColor: 'rgba(6, 111, 108, 0.95)'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Company Logo */}
@@ -194,15 +194,16 @@ export default function Home() {
               dir={language === "ur" ? "rtl" : "ltr"}
             >
               {t.title}
-              <span className="block mt-4 bg-gradient-to-r from-green-200 to-emerald-200 bg-clip-text text-transparent">
+              <span className="block mt-4" style={{color: '#99d4d0'}}>
                 {t.titleSecond}
               </span>
             </h1>
             <p
-              className={`text-xl sm:text-2xl lg:text-3xl text-green-50 font-medium max-w-full mx-auto lg:mx-0 leading-relaxed ${
+              className={`text-xl sm:text-2xl lg:text-3xl font-medium max-w-full mx-auto lg:mx-0 leading-relaxed ${
                 language === "ur" ? "font-urdu" : "font-inter"
               }`}
               dir={language === "ur" ? "rtl" : "ltr"}
+              style={{color: '#e0f7f6'}}
             >
               {t.subtitle}
             </p>
@@ -211,7 +212,8 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 mt-10">
               <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-lg">
                 <svg
-                  className="w-5 h-5 text-green-200"
+                  className="w-5 h-5"
+                  style={{color: '#066f6c'}}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -234,7 +236,8 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-lg">
                 <svg
-                  className="w-5 h-5 text-green-200"
+                  className="w-5 h-5"
+                  style={{color: '#066f6c'}}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -257,7 +260,8 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-lg">
                 <svg
-                  className="w-5 h-5 text-green-200"
+                  className="w-5 h-5"
+                  style={{color: '#066f6c'}}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -355,7 +359,7 @@ export default function Home() {
                     </div>
 
                     {/* App Header */}
-                    <div className="h-16 bg-gradient-to-r from-[#1a3d2b] to-[#2d5f3f] flex items-center justify-between px-4 shadow-md">
+                    <div className="h-16 flex items-center justify-between px-4 shadow-md" style={{backgroundImage: 'linear-gradient(to right, #066f6c, #054945)'}}>
                       <Logo className="scale-75" textColor="white" />
                       <div className="flex items-center gap-3">
                         <button className="p-2 hover:bg-white/10 rounded-full transition">
@@ -467,7 +471,7 @@ export default function Home() {
 
                       {/* Quick Filters */}
                       <div className="px-4 py-3 flex gap-2 overflow-x-auto no-scrollbar">
-                        <button className="px-4 py-2 bg-[#1a3d2b] text-white text-xs font-semibold rounded-full whitespace-nowrap shadow-sm">
+                        <button className="px-4 py-2 text-white text-xs font-semibold rounded-full whitespace-nowrap shadow-sm" style={{backgroundColor: '#066f6c'}}>
                           {t.availableNow}
                         </button>
                         <button className="px-4 py-2 bg-white text-gray-700 text-xs font-semibold rounded-full whitespace-nowrap border border-gray-200">
@@ -721,10 +725,11 @@ export default function Home() {
                         {/* Card 3 - Cafe */}
                         <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition">
                           <div className="flex gap-3 p-3">
-                            <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-emerald-100 via-green-100 to-emerald-200">
+                            <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden" style={{backgroundImage: 'linear-gradient(to bottom right, #99d4d0, #99d4d0, #066f6c)'}}>
                               <div className="absolute inset-0 flex items-center justify-center">
                                 <svg
-                                  className="w-12 h-12 text-green-500 opacity-50"
+                                  className="w-12 h-12 opacity-50"
+                                  style={{color: '#066f6c'}}
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                 >
@@ -860,19 +865,19 @@ export default function Home() {
 
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-20 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-green-400/10 rounded-full blur-3xl"></div>
+          <div className="rounded-full blur-3xl" style={{position: 'absolute', top: '80px', right: '80px', width: '384px', height: '384px', backgroundColor: 'rgba(6, 111, 108, 0.1)'}}></div>
+          <div className="rounded-full blur-3xl" style={{position: 'absolute', bottom: '80px', left: '80px', width: '384px', height: '384px', backgroundColor: 'rgba(6, 111, 108, 0.1)'}}></div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-[#1a3d2b] border-t border-white/10 py-12">
+      <footer className="relative border-t border-white/10 py-12" style={{backgroundColor: '#0a4845'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Company Info */}
             <div>
               <Logo className="mb-4" textColor="white" />
-              <p className="text-sm text-green-100/80 leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{color: '#99d4d0'}}>
                 Connecting surplus food with those who want quality meals at
                 affordable prices.
               </p>
@@ -881,7 +886,7 @@ export default function Home() {
             {/* Quick Links */}
             <div>
               <h3 className="text-white font-semibold mb-3">Quick Links</h3>
-              <ul className="space-y-2 text-sm text-green-100/80">
+              <ul className="space-y-2 text-sm" style={{color: '#99d4d0'}}>
                 <li>
                   <a className="pointer-events-none cursor-not-allowed opacity-60">
                     About Us
@@ -908,7 +913,7 @@ export default function Home() {
             {/* Newsletter */}
             <div>
               <h3 className="text-white font-semibold mb-3">Stay Updated</h3>
-              <p className="text-sm text-green-100/80 mb-3">
+              <p className="text-sm mb-3" style={{color: '#99d4d0'}}>
                 Join our mailing list to receive launch updates and occasional
                 product news. We only store your email in Notion for now.
               </p>
@@ -929,14 +934,15 @@ export default function Home() {
                 <button
                   onClick={handleSubscribe}
                   disabled={status === "loading"}
-                  className="px-4 py-2 bg-white text-[#1a3d2b] rounded-lg font-semibold text-sm hover:bg-green-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-white rounded-lg font-semibold text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{color: '#066f6c'}}
                 >
                   {status === "loading" ? "Sending..." : "Join"}
                 </button>
               </div>
               <div className="mt-2">
                 {status === "success" && (
-                  <p className="text-sm text-green-200">{message}</p>
+                  <p className="text-sm" style={{color: '#066f6c'}}>{message}</p>
                 )}
                 {status === "error" && (
                   <p className="text-sm text-red-300">{message}</p>
@@ -946,11 +952,11 @@ export default function Home() {
           </div>
 
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-green-100/60 text-sm">
+            <p className="text-sm" style={{color: '#99d4d0'}}>
               © 2026 LeftNotOver. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <a className="text-green-100/60 pointer-events-none cursor-not-allowed opacity-60">
+              <a className="pointer-events-none cursor-not-allowed opacity-60" style={{color: '#99d4d0'}}>
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
@@ -959,7 +965,7 @@ export default function Home() {
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
-              <a className="text-green-100/60 pointer-events-none cursor-not-allowed opacity-60">
+              <a className="pointer-events-none cursor-not-allowed opacity-60" style={{color: '#99d4d0'}}>
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
@@ -968,7 +974,7 @@ export default function Home() {
                   <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                 </svg>
               </a>
-              <a className="text-green-100/60 pointer-events-none cursor-not-allowed opacity-60">
+              <a className="pointer-events-none cursor-not-allowed opacity-60" style={{color: '#99d4d0'}}>
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
