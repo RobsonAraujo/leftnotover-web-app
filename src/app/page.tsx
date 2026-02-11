@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const translations = {
   en: {
@@ -110,12 +110,25 @@ export default function Home() {
   const [language, setLanguage] = useState<"en" | "ur">("en");
   const t = translations[language];
 
+  // Header scroll state
+  const [isScrolled, setIsScrolled] = useState(false);
+
   // Newsletter / subscription state
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   async function handleSubscribe() {
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -156,13 +169,18 @@ export default function Home() {
     >
       {/* Header */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/10"
-        style={{ backgroundColor: "rgba(6, 111, 108, 0.95)" }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          backgroundColor: isScrolled ? "#f9f3f1" : "transparent",
+          borderBottom: isScrolled
+            ? "1px solid #e0d5d0"
+            : "0.1px solid #f9f3f1",
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-24">
             {/* Company Logo */}
-            <Logo textColor="white" />
+            <Logo textColor={isScrolled ? "#066f6c" : "white"} />
 
             {/* Language Selector */}
             <div className="flex items-center gap-2">
@@ -170,8 +188,12 @@ export default function Home() {
                 onClick={() => setLanguage("en")}
                 className={`px-4 py-2 rounded-lg font-medium transition-all cursor-pointer ${
                   language === "en"
-                    ? "bg-white text-[#2d5f3f] shadow-lg"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                    ? isScrolled
+                      ? "bg-[#066f6c] text-white shadow-lg"
+                      : "bg-white text-[#066f6c] shadow-lg"
+                    : isScrolled
+                      ? "text-[#066f6c]/80 hover:text-[#066f6c] hover:bg-[#066f6c]/10"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
                 }`}
               >
                 English
@@ -180,8 +202,12 @@ export default function Home() {
                 onClick={() => setLanguage("ur")}
                 className={`px-4 py-2 rounded-lg font-medium transition-all cursor-pointer ${
                   language === "ur"
-                    ? "bg-white text-[#2d5f3f] shadow-lg"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                    ? isScrolled
+                      ? "bg-[#066f6c] text-white shadow-lg"
+                      : "bg-white text-[#066f6c] shadow-lg"
+                    : isScrolled
+                      ? "text-[#066f6c]/80 hover:text-[#066f6c] hover:bg-[#066f6c]/10"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
                 }`}
               >
                 اردو
