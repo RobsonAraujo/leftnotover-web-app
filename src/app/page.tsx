@@ -90,16 +90,24 @@ const Logo = ({
       {/* Text */}
       <div className="flex flex-col leading-none">
         <span
-          className="text-2xl  font-bold tracking-tight"
+          className="text-2xl font-bold tracking-tight"
           style={{ color: textColor }}
         >
           LeftNotOver
         </span>
+        {/* Tagline: same style everywhere, but mobile only shows two words */}
         <span
-          className="hidden sm:block text-[10px] tracking-wider opacity-80"
-          style={{ color: textColor }}
+          className="text-[10px] tracking-wider opacity-80"
+          style={{ color: textColor, textTransform: "uppercase" }}
         >
-          FRESH • AFFORDABLE • SUSTAINABLE
+          <span>FRESH</span>
+          <span className="mx-[0.2em]">•</span>
+          <span>AFFORDABLE</span>
+          {/* Third word only on ≥ sm (desktop / tablet) */}
+          <span className="hidden sm:inline">
+            <span className="mx-[0.2em]">•</span>
+            SUSTAINABLE
+          </span>
         </span>
       </div>
     </div>
