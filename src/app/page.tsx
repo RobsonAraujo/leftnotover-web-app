@@ -41,7 +41,7 @@ const Logo = ({
   textColor?: string;
 }) => {
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-1 sm:gap-2 ${className}`}>
       {/* Icon: Leaf + Plate symbolizing fresh food and sustainability */}
       <div className="relative">
         <svg
@@ -90,13 +90,13 @@ const Logo = ({
       {/* Text */}
       <div className="flex flex-col leading-none">
         <span
-          className={`text-2xl font-bold tracking-tight`}
+          className="text-2xl  font-bold tracking-tight"
           style={{ color: textColor }}
         >
           LeftNotOver
         </span>
         <span
-          className={`text-[10px] tracking-wider opacity-80`}
+          className="hidden sm:block text-[10px] tracking-wider opacity-80"
           style={{ color: textColor }}
         >
           FRESH • AFFORDABLE • SUSTAINABLE
